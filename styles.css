@@ -1,60 +1,64 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f8;
-    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
     margin: 0;
     padding: 40px;
+    text-align: center;
+    color: white;
 }
 
 h1{
-    color: #333;
+    margin-bottom: 20px;
 }
 
 button{
-    background-color: #24292e;
-    color: white;
+    background: white;
+    color: #333;
     border: none;
-    padding: 12px 20px;
+    padding: 12px 25px;
     font-size: 16px;
-    border-radius: 6px;
+    border-radius: 25px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover{
-    background-color: #444;
+    transform: scale(1.05);
 }
 
-#estado{
-    margin-top: 20px;
-    font-size: 18px;
-    color: #555;
-}
-
-/* contenedor de tarjetas */
-#contenedorUsuarios{
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+#mensaje{
+    margin-top: 15px;
 }
 
 /* tarjeta */
 .tarjeta{
-    padding: 20px;
-    width: 200px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 30px auto;
+    padding: 25px;
+    width: 250px;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
+/* imagen */
 .tarjeta img{
     width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
 
-.tarjeta h2{
-    margin-top: 10px;
-    font-size: 18px;
-    color: #333;
+/* etiquetas */
+#etiquetas{
+    margin-top: 15px;
+}
+
+.etiqueta{
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 3px;
+    font-size: 12px;
 }

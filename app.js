@@ -1,45 +1,74 @@
-async function cargarUsuarios() {
+// SECCIÓN A
+const habilidades = ["Base de datos", "Paginas web", "APIs", "Inteligencia Artificial", "Machine Learning", "Deep Learning", "Data Science", "Big Data", "Cloud Computing"];
 
-    const estado = document.getElementById("estado");
-    const contenedor = document.getElementById("contenedorUsuarios");
+// SECCIÓN B
+const mostrarEtiquetas = (lista) => {
 
-    // limpiar contenedor
+    const contenedor = document.querySelector("#etiquetas");
+
     contenedor.innerHTML = "";
 
-    estado.textContent = "Cargando...";
+    lista.forEach(habilidad => {
+
+        const span = document.createElement("span");
+        span.classList.add("etiqueta");
+        span.textContent = habilidad;
+
+        contenedor.appendChild(span);
+
+    });
+};
+
+// SECCIÓN C
+const construirPerfil = (datos) => {
+    return {
+        nombre: datos.name || "Sin nombre",
+        usuario: "@" + datos.login,
+        email: datos.email || "No disponible",
+        ciudad: datos.location || "Sin ubicación",
+        avatar: datos.avatar_url
+    };
+};
+
+// SECCIÓN D
+const renderizarPerfil = (perfil) => {
+
+    document.querySelector("#nombre").textContent = perfil.nombre;
+    document.querySelector("#usuario").textContent = perfil.usuario;
+    document.querySelector("#email").textContent = perfil.email;
+    document.querySelector("#ciudad").textContent = perfil.ciudad;
+
+    document.querySelector("#avatar").src = perfil.avatar;
+};
+
+// SECCIÓN E
+const cargarUsuario = async () => {
+
+    const mensaje = document.querySelector("#mensaje");
+
+    mensaje.textContent = "Cargando...";
 
     try {
 
-        const respuesta = await fetch("https://api.github.com/users");
+        const res = await fetch("https://api.github.com/users");
 
-        const usuarios = await respuesta.json();
+        const data = await res.json();
 
-        estado.textContent = "Usuarios cargados";
+        const perfil = construirPerfil(data[0]);
 
-        console.log(usuarios);
+        renderizarPerfil(perfil);
 
-        usuarios.forEach(usuario => {
+        mostrarEtiquetas(habilidades);
 
-            const tarjeta = document.createElement("div");
-            tarjeta.classList.add("tarjeta");
-
-            const img = document.createElement("img");
-            img.src = usuario.avatar_url;
-
-            const nombre = document.createElement("h2");
-            nombre.textContent = usuario.login;
-
-            tarjeta.appendChild(img);
-            tarjeta.appendChild(nombre);
-
-            contenedor.appendChild(tarjeta);
-
-        });
+        mensaje.textContent = "";
 
     } catch (error) {
 
-        estado.textContent = "Error al cargar usuarios";
+        mensaje.textContent = "Error al cargar usuario";
         console.error(error);
 
     }
-}
+};
+
+// SECCIÓN F
+document.querySelector("#btn").addEventListener("click", cargarUsuario);
