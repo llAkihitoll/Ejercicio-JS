@@ -51,10 +51,14 @@ const cargarUsuario = async () => {
     try {
 
         const res = await fetch("https://api.github.com/users");
-
         const data = await res.json();
 
-        const perfil = construirPerfil(data[0]);
+        const usuario = data[0];
+
+        const resDetalle = await fetch(usuario.url);
+        const datosCompletos = await resDetalle.json();
+
+        const perfil = construirPerfil(datosCompletos);
 
         renderizarPerfil(perfil);
 
